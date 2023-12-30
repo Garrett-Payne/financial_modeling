@@ -1,0 +1,70 @@
+## This script is intended to show procesing times for reading/writing to csv files
+## Taken from chapter 9, pages 236 - 239 of Reference book
+
+import numpy as np
+import pandas as pd 
+import csv
+import time
+
+rows = 5000
+
+# define where to write data to
+path = '../data/'
+
+# Create random value matrix with nrows & 5 columns
+a = np.random.standard_normal((rows, 5)).round(4)
+
+# create pandas datetime index array for 5000 values
+t = pd.date_range(start='2019/1/1', periods=rows, freq='H')
+
+# open file name
+csv_file = open(path + 'data.csv', 'w')
+
+# define header string (with return carriage \n)
+header = 'date,no1,no2,no3,no4,no5\n'
+
+# write this header to the file
+csv_file.write(header)
+
+# Use for loop to write each value into the CSV file
+for t_, (no1, no2, no3, no4, no5) in zip(t, a):
+    s = '{},{},{},{},{},{}\n'.format(t_, no1, no2, no3, no4, no5) 
+    csv_file.write(s)
+
+# Close out the file
+csv_file.close()
+
+# open up file
+csv_file = open(path + 'data.csv', 'r')
+
+# print out first 5 rows of data, using the .readline method
+for i in range(5): 
+    print(csv_file.readline(), end='')
+# close it back out
+csv_file.close()
+
+# re-open file, read it all into variable content, then print the first 5 values
+t1 = time.time()
+csv_file = open(path + 'data.csv', 'r') 
+content = csv_file.readlines()
+t2 = time.time()
+print("Time to read in full csv file using readlines command: {}".format(t2-t1))
+# close it back out
+csv_file.close()
+
+# use the csv package to load in the full file
+t1 = time.time()
+with open(path + 'data.csv', 'r') as f: 
+    csv_reader = csv.reader(f)
+    lines = [line for line in csv_reader]
+t2 = time.time()
+print("Time to read in full csv file using csv library: {}".format(t2-t1))
+
+
+# read in data into an ordered dictionary
+t1 = time.time()
+with open(path + 'data.csv', 'r') as f: 
+    csv_reader = csv.DictReader(f)
+    lines = [line for line in csv_reader]
+t2 = time.time()
+print("Time to read in full csv file into dictionary using csv library: {}".format(t2-t1))
