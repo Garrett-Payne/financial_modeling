@@ -4,6 +4,7 @@ import cufflinks as cf
 import pandas as pd
 import plotly.offline as plyo
 
+
 # Load in data file
 raw = pd.read_csv('../data/fxcm_eur_usd_eod_data.csv', index_col=0, parse_dates=True)
 quotes = raw[['OpenAsk', 'HighAsk', 'LowAsk', 'CloseAsk']] # filter down to these 4 columns

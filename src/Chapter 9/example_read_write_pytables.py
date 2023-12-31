@@ -1,5 +1,5 @@
 ## This script is intended to show procesing times for reading/writing to files using pytables
-## Taken from chapter 9, pages 252 - 2 of Reference book
+## Taken from chapter 9, pages 252 - 267 of Reference book
 import time
 import numpy as np
 from pylab import plt
