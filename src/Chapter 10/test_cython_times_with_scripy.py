@@ -1,5 +1,5 @@
-## This script is intended to show procesing times for various types of loops
-## Taken from chapter 10, pages 280 - of Reference book
+## This script is intended to show procesing times for using cython- dedicated scripts/functions
+## Taken from chapter 10, pages 280 - 281 of Reference book
 import random
 import time
 import cython
@@ -12,6 +12,7 @@ import pyximport; pyximport.install(pyimport=True,language_level=3)
 # define number of iterations to go through
 n = 10000000 
 
+# generate function using cython calls
 def average_cy1(n: cython.int):
     i: cython.int 
     s: cython.float = 0 
