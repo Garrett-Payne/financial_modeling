@@ -1,5 +1,5 @@
 ## This script is intended to show procesing times for the Fibonacci sequence optimization
-## Taken from chapter 10, pages 286 - 285 of Reference book
+## Taken from chapter 10, pages 286 - 289 of Reference book
 
 import time
 import cython
